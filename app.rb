@@ -5,13 +5,11 @@ get("/") do
   erb(:homepage)
 end
 
-get("/:rps") do
+get("/:hands") do
 
-@rps = params.fetch("rps")
+@rps = params[:hands]
 
 @moves = ["rock", "paper", "scissors"]
-
-
 @comp_move = @moves.sample
 
 if @comp_move == @rps 
@@ -26,10 +24,6 @@ if @comp_move == @rps
   @outcome = "won"
   end
 
-
-
-  erb(:chomp)
-  erb(:swim)
   erb(:turtle)
 
 end
