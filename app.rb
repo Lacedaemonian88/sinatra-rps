@@ -5,50 +5,31 @@ get("/") do
   erb(:homepage)
 end
 
-get("/rock") do
-moves = ["rock", "paper", "scissors"]
+get("/:rps") do
 
-@comp_move = moves.sample
+@rps = params.fetch("rps")
 
-if @comp_move == "rock"
+@moves = ["rock", "paper", "scissors"]
+
+
+@comp_move = @moves.sample
+
+if @comp_move == @rps 
   @outcome = "tied"
-elsif @comp_move == "paper"
+  elsif @comp_move == "paper" && @rps == "rock"
   @outcome = "lost"
-else
+  elsif @comp_move == "rock" && @rps == "scissors"
+  @outcome = "lost"
+  elsif @comp_move == "scissors" && @rps == "paper"
+  @outcome = "lost"
+  else
   @outcome = "won"
-end
-
-erb(:turtle)
-end
-
-get("/paper") do
-  moves = ["rock", "paper", "scissors"]
-
-  @comp_move = moves.sample
-  
-  if @comp_move == "paper"
-    @outcome = "tied"
-  elsif @comp_move == "scissors"
-    @outcome = "lost"
-  else
-    @outcome = "won"
   end
 
-  erb(:swim)
-end
 
-get("/scissors") do
-  moves = ["rock", "paper", "scissors"]
-
-  @comp_move = moves.sample
-  
-  if @comp_move == "scissors"
-    @outcome = "tied"
-  elsif @comp_move == "rock"
-    @outcome = "lost"
-  else
-    @outcome = "won"
-  end
 
   erb(:chomp)
+  erb(:swim)
+  erb(:turtle)
+
 end
